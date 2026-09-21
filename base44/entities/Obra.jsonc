@@ -1,0 +1,86 @@
+{
+  "name": "Obra",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "title": "Nome da obra"
+    },
+    "descricao": {
+      "type": "string",
+      "title": "Descri\u00e7\u00e3o"
+    },
+    "cliente": {
+      "type": "string",
+      "title": "Cliente"
+    },
+    "endereco": {
+      "type": "string",
+      "title": "Endere\u00e7o"
+    },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "enum": [
+        "planejamento",
+        "andamento",
+        "concluida",
+        "pausada",
+        "cancelada"
+      ],
+      "default": "planejamento"
+    },
+    "data_inicio": {
+      "type": "string",
+      "format": "date",
+      "title": "Data de in\u00edcio"
+    },
+    "previsao_conclusao": {
+      "type": "string",
+      "format": "date",
+      "title": "Previs\u00e3o de conclus\u00e3o"
+    }
+  },
+  "required": [
+    "nome"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

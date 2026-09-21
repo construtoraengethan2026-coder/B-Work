@@ -1,0 +1,55 @@
+{
+  "name": "Foto",
+  "type": "object",
+  "properties": {
+    "obra_id": {
+      "type": "string",
+      "title": "Obra"
+    },
+    "ambiente_id": {
+      "type": "string",
+      "title": "Ambiente"
+    },
+    "file_url": {
+      "type": "string",
+      "title": "Arquivo",
+      "format": "file"
+    },
+    "legenda": {
+      "type": "string",
+      "title": "Legenda"
+    }
+  },
+  "required": [
+    "obra_id",
+    "file_url"
+  ],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

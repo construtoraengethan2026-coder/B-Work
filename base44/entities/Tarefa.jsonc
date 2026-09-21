@@ -1,0 +1,74 @@
+{
+  "name": "Tarefa",
+  "type": "object",
+  "properties": {
+    "obra_id": {
+      "type": "string",
+      "title": "Obra"
+    },
+    "ambiente_id": {
+      "type": "string",
+      "title": "Ambiente"
+    },
+    "titulo": {
+      "type": "string",
+      "title": "T\u00edtulo"
+    },
+    "descricao": {
+      "type": "string",
+      "title": "Descri\u00e7\u00e3o"
+    },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "enum": [
+        "pendente",
+        "andamento",
+        "concluido",
+        "cancelado"
+      ],
+      "default": "pendente"
+    },
+    "prioridade": {
+      "type": "string",
+      "title": "Prioridade",
+      "enum": [
+        "baixa",
+        "media",
+        "alta",
+        "urgente"
+      ],
+      "default": "media"
+    },
+    "responsavel_id": {
+      "type": "string",
+      "title": "Respons\u00e1vel"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Conclu\u00eddo em"
+    }
+  },
+  "required": [
+    "obra_id",
+    "titulo"
+  ],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": true,
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "MembroObra",
+  "type": "object",
+  "properties": {
+    "obra_id": {
+      "type": "string",
+      "title": "Obra"
+    },
+    "user_id": {
+      "type": "string",
+      "title": "Usu\u00e1rio"
+    }
+  },
+  "required": [
+    "obra_id",
+    "user_id"
+  ],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
